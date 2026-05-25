@@ -46,6 +46,12 @@ export async function browseTv(page = 1) {
   return fetchApi<import('./types').SearchResponse>(`/api/browse/tv?page=${page}`);
 }
 
+export async function browseByGenre(type: 'movie' | 'tv', genre: string, page = 1) {
+  return fetchApi<import('./types').SearchResponse>(
+    `/api/browse/genre?type=${type}&genre=${encodeURIComponent(genre)}&page=${page}`
+  );
+}
+
 // ===== Streaming =====
 export async function getMovieStream(id: number) {
   return fetchApi<import('./types').StreamResponse>(`/api/stream/movie/${id}`);

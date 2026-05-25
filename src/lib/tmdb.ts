@@ -128,6 +128,73 @@ export async function getPopularTv(page = 1) {
   return normalizeResults(data);
 }
 
+// ===== Genre Discovery =====
+
+const GENRE_MAP: Record<string, number> = {
+  action: 28,
+  adventure: 12,
+  animation: 16,
+  comedy: 35,
+  crime: 80,
+  documentary: 99,
+  drama: 18,
+  family: 10751,
+  fantasy: 14,
+  history: 36,
+  horror: 27,
+  music: 10402,
+  mystery: 9648,
+  romance: 10749,
+  'science-fiction': 878,
+  thriller: 53,
+  'tv-movie': 10770,
+  war: 10752,
+  western: 37,
+};
+
+const GENRE_NAMES: Record<string, string> = {
+  action: 'Action',
+  adventure: 'Adventure',
+  animation: 'Animation',
+  comedy: 'Comedy',
+  crime: 'Crime',
+  documentary: 'Documentary',
+  drama: 'Drama',
+  family: 'Family',
+  fantasy: 'Fantasy',
+  history: 'History',
+  horror: 'Horror',
+  music: 'Music',
+  mystery: 'Mystery',
+  romance: 'Romance',
+  'science-fiction': 'Science Fiction',
+  thriller: 'Thriller',
+  'tv-movie': 'TV Movie',
+  war: 'War',
+  western: 'Western',
+};
+
+export function getGenreId(slug: string): number | undefined {
+  return GENRE_MAP[slug];
+}
+
+export function getGenreName(slug: string): string | undefined {
+  return GENRE_NAMES[slug];
+}
+
+export async function getDiscoverByGenre(type: 'movie' | 'tv', genreSlug: string, page = 1) {
+  const genreId = GENRE_MAP[genreSlug];
+  if (!genreId) {
+    throw new Error(`Unknown genre slug: ${genreSlug}`);
+  }
+  const data = await tmdbFetch<any>(`/discover/${type}`, {
+    with_genres: genreId,
+    sort_by: 'popularity.desc',
+    page,
+  });
+  return normalizeResults(data);
+}
+
 // ===== Stream Source URLs =====
 
 export function getVidsrcMovieUrl(tmdbId: number): string {
