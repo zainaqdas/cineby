@@ -146,28 +146,19 @@ export function getVidsrcMirrorTvUrl(tmdbId: number, season: number, episode: nu
   return `https://vidsrc.${mirror}/embed/tv/${tmdbId}/${season}/${episode}`;
 }
 
-export function getEmbedSuMovieUrl(tmdbId: number): string {
-  return `https://embed.su/embed/movie/${tmdbId}`;
+export function getMultiEmbedMovieUrl(tmdbId: number): string {
+  return `https://multiembed.mov/?video_id=${tmdbId}&tmdb=1`;
 }
 
-export function getEmbedSuTvUrl(tmdbId: number, season: number, episode: number): string {
-  return `https://embed.su/embed/tv/${tmdbId}/${season}/${episode}`;
-}
-
-export function getSuperEmbedMovieUrl(tmdbId: number): string {
-  return `https://multiembed.mov/directstream.php?video_id=${tmdbId}&tmdb=1`;
-}
-
-export function getSuperEmbedTvUrl(tmdbId: number, season: number, episode: number): string {
-  return `https://multiembed.mov/directstream.php?video_id=${tmdbId}&tmdb=1&s=${season}&e=${episode}`;
+export function getMultiEmbedTvUrl(tmdbId: number, season: number, episode: number): string {
+  return `https://multiembed.mov/?video_id=${tmdbId}&tmdb=1&s=${season}&e=${episode}`;
 }
 
 export function getMovieSources(tmdbId: number): { name: string; url: string }[] {
   return [
     { name: 'VidSrc', url: getVidsrcMovieUrl(tmdbId) },
     { name: 'VidSrc (Mirror)', url: getVidsrcMirrorMovieUrl(tmdbId, 'dev') },
-    { name: 'Embed.su', url: getEmbedSuMovieUrl(tmdbId) },
-    { name: 'MultiEmbed', url: getSuperEmbedMovieUrl(tmdbId) },
+    { name: 'MultiEmbed', url: getMultiEmbedMovieUrl(tmdbId) },
   ];
 }
 
@@ -175,7 +166,6 @@ export function getTvSources(tmdbId: number, season: number, episode: number): {
   return [
     { name: 'VidSrc', url: getVidsrcTvUrl(tmdbId, season, episode) },
     { name: 'VidSrc (Mirror)', url: getVidsrcMirrorTvUrl(tmdbId, season, episode, 'dev') },
-    { name: 'Embed.su', url: getEmbedSuTvUrl(tmdbId, season, episode) },
-    { name: 'MultiEmbed', url: getSuperEmbedTvUrl(tmdbId, season, episode) },
+    { name: 'MultiEmbed', url: getMultiEmbedTvUrl(tmdbId, season, episode) },
   ];
 }
