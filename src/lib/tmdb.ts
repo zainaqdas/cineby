@@ -1,5 +1,8 @@
-const TMDB_PROXY = 'https://db.videasy.net/3';
+const TMDB_BASE = 'https://api.themoviedb.org/3';
 const IMAGE_BASE = 'https://image.tmdb.org/t/p/';
+const TMDB_API_KEY: string = process.env.TMDB_API_KEY ?? (() => {
+  throw new Error('Missing TMDB_API_KEY environment variable. Set it in .env.local or Vercel dashboard.');
+})();
 
 // ===== Embed Source Base Domains =====
 // Update these values when a provider changes domain
@@ -15,11 +18,12 @@ interface TmdbOptions {
 
 async function tmdbFetch<T>(path: string, options: TmdbOptions = {}): Promise<T> {
   const params = new URLSearchParams();
+  params.set('api_key', TMDB_API_KEY);
   Object.entries(options).forEach(([key, value]) => {
     if (value !== undefined) params.set(key, String(value));
   });
   const query = params.toString();
-  const url = `${TMDB_PROXY}${path}${query ? `?${query}` : ''}`;
+  const url = `${TMDB_BASE}${path}?${query}`;
   const res = await fetch(url, {
     headers: { Accept: 'application/json' },
   });
