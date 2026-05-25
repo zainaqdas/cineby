@@ -1,6 +1,11 @@
 const TMDB_PROXY = 'https://db.videasy.net/3';
 const IMAGE_BASE = 'https://image.tmdb.org/t/p/';
 
+// ===== Embed Source Base Domains =====
+// Update these values when a provider changes domain
+const VIDSRC_BASE = 'vidsrc.to';
+const MULTIEMBED_BASE = 'multiembed.mov';
+
 interface TmdbOptions {
   append_to_response?: string;
   page?: number;
@@ -198,19 +203,19 @@ export async function getDiscoverByGenre(type: 'movie' | 'tv', genreSlug: string
 // ===== Stream Source URLs =====
 
 export function getVidsrcMovieUrl(tmdbId: number): string {
-  return `https://vidsrc.to/embed/movie/${tmdbId}`;
+  return `https://${VIDSRC_BASE}/embed/movie/${tmdbId}`;
 }
 
 export function getVidsrcTvUrl(tmdbId: number, season: number, episode: number): string {
-  return `https://vidsrc.to/embed/tv/${tmdbId}/${season}/${episode}`;
+  return `https://${VIDSRC_BASE}/embed/tv/${tmdbId}/${season}/${episode}`;
 }
 
 export function getMultiEmbedMovieUrl(tmdbId: number): string {
-  return `https://multiembed.mov/?video_id=${tmdbId}&tmdb=1`;
+  return `https://${MULTIEMBED_BASE}/?video_id=${tmdbId}&tmdb=1`;
 }
 
 export function getMultiEmbedTvUrl(tmdbId: number, season: number, episode: number): string {
-  return `https://multiembed.mov/?video_id=${tmdbId}&tmdb=1&s=${season}&e=${episode}`;
+  return `https://${MULTIEMBED_BASE}/?video_id=${tmdbId}&tmdb=1&s=${season}&e=${episode}`;
 }
 
 export function getMovieSources(tmdbId: number): { name: string; url: string }[] {
