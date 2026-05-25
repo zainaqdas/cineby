@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120">
+  <defs>
+    <linearGradient id="logog" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#059669"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+  </defs>
+  <!-- Rounded square background -->
+  <rect x="8" y="8" width="104" height="104" rx="24" fill="url(#logog)"/>
+  <!-- Play triangle -->
+  <path d="M48 36L78 60L48 84Z" fill="white"/>
+  <!-- N letter -->
+  <path d="M33 42V78H43L43 56L53 78H63L63 42H53V62L43 42Z" fill="rgba(255,255,255,0.9)"/>
+</svg>
