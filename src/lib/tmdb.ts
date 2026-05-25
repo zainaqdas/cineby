@@ -16,7 +16,7 @@ interface TmdbOptions {
   [key: string]: string | number | undefined;
 }
 
-async function tmdbFetch<T>(path: string, options: TmdbOptions = {}): Promise<T> {
+async function tmdbFetch<T>(path: string, options: TmdbOptions = {}, revalidate = 3600): Promise<T> {
   const params = new URLSearchParams();
   params.set('api_key', TMDB_API_KEY);
   Object.entries(options).forEach(([key, value]) => {
@@ -26,6 +26,7 @@ async function tmdbFetch<T>(path: string, options: TmdbOptions = {}): Promise<T>
   const url = `${TMDB_BASE}${path}?${query}`;
   const res = await fetch(url, {
     headers: { Accept: 'application/json' },
+    next: { revalidate },
   });
   if (!res.ok) {
     throw new Error(`TMDB error ${res.status}: ${res.statusText}`);
@@ -102,19 +103,19 @@ function normalizeResults(data: any) {
 export async function getMovie(id: number) {
   const data = await tmdbFetch<any>(`/movie/${id}`, {
     append_to_response: 'credits,videos,recommendations,similar',
-  });
+  }, 86400);
   return normalizeMedia(data);
 }
 
 export async function getTvShow(id: number) {
   const data = await tmdbFetch<any>(`/tv/${id}`, {
     append_to_response: 'credits,videos,recommendations,similar',
-  });
+  }, 86400);
   return normalizeMedia(data);
 }
 
 export async function getSeason(tvId: number, season: number) {
-  return tmdbFetch<any>(`/tv/${tvId}/season/${season}`);
+  return tmdbFetch<any>(`/tv/${tvId}/season/${season}`, {}, 86400);
 }
 
 export async function searchMulti(query: string, page = 1) {

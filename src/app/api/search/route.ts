@@ -9,7 +9,9 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ page: 1, results: [], total_pages: 0, total_results: 0 });
     }
     const data = await searchMulti(query, page);
-    return NextResponse.json(data);
+    return NextResponse.json(data, {
+      headers: { 'Cache-Control': 'public, max-age=3600, s-maxage=3600' },
+    });
   } catch (error: any) {
     return NextResponse.json(
       { error: 'Search failed', message: error.message },

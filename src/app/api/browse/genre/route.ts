@@ -15,7 +15,9 @@ export async function GET(req: NextRequest) {
     }
 
     const data = await getDiscoverByGenre(type, genre, page);
-    return NextResponse.json(data);
+    return NextResponse.json(data, {
+      headers: { 'Cache-Control': 'public, max-age=3600, s-maxage=3600' },
+    });
   } catch (error: any) {
     return NextResponse.json(
       { error: 'Failed to fetch by genre', message: error.message },

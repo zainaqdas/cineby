@@ -8,7 +8,9 @@ export async function GET(
   try {
     const { id, season } = await params;
     const data = await getSeason(Number(id), Number(season));
-    return NextResponse.json(data);
+    return NextResponse.json(data, {
+      headers: { 'Cache-Control': 'public, max-age=86400, s-maxage=86400' },
+    });
   } catch (error: any) {
     return NextResponse.json(
       { error: 'Failed to fetch season', message: error.message },
