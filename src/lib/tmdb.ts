@@ -138,14 +138,6 @@ export function getVidsrcTvUrl(tmdbId: number, season: number, episode: number):
   return `https://vidsrc.to/embed/tv/${tmdbId}/${season}/${episode}`;
 }
 
-export function getVidsrcMirrorMovieUrl(tmdbId: number, mirror: string): string {
-  return `https://vidsrc.${mirror}/embed/movie/${tmdbId}`;
-}
-
-export function getVidsrcMirrorTvUrl(tmdbId: number, season: number, episode: number, mirror: string): string {
-  return `https://vidsrc.${mirror}/embed/tv/${tmdbId}/${season}/${episode}`;
-}
-
 export function getMultiEmbedMovieUrl(tmdbId: number): string {
   return `https://multiembed.mov/?video_id=${tmdbId}&tmdb=1`;
 }
@@ -157,7 +149,6 @@ export function getMultiEmbedTvUrl(tmdbId: number, season: number, episode: numb
 export function getMovieSources(tmdbId: number): { name: string; url: string }[] {
   return [
     { name: 'VidSrc', url: getVidsrcMovieUrl(tmdbId) },
-    { name: 'VidSrc (Mirror)', url: getVidsrcMirrorMovieUrl(tmdbId, 'dev') },
     { name: 'MultiEmbed', url: getMultiEmbedMovieUrl(tmdbId) },
   ];
 }
@@ -165,7 +156,6 @@ export function getMovieSources(tmdbId: number): { name: string; url: string }[]
 export function getTvSources(tmdbId: number, season: number, episode: number): { name: string; url: string }[] {
   return [
     { name: 'VidSrc', url: getVidsrcTvUrl(tmdbId, season, episode) },
-    { name: 'VidSrc (Mirror)', url: getVidsrcMirrorTvUrl(tmdbId, season, episode, 'dev') },
     { name: 'MultiEmbed', url: getMultiEmbedTvUrl(tmdbId, season, episode) },
   ];
 }
