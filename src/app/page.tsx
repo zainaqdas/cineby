@@ -89,7 +89,7 @@ export default function Home() {
               { name: 'Comedy', color: 'from-yellow-500 to-orange-500', slug: 'comedy' },
               { name: 'Drama', color: 'from-blue-600 to-indigo-600', slug: 'drama' },
               { name: 'Horror', color: 'from-emerald-700 to-teal-700', slug: 'horror' },
-              { name: 'Sci-Fi', color: 'from-cyan-500 to-blue-600', slug: 'sci-fi' },
+              { name: 'Sci-Fi', color: 'from-cyan-500 to-blue-600', slug: 'science-fiction' },
               { name: 'Romance', color: 'from-pink-500 to-rose-600', slug: 'romance' },
               { name: 'Thriller', color: 'from-gray-700 to-gray-900', slug: 'thriller' },
               { name: 'Animation', color: 'from-green-400 to-emerald-600', slug: 'animation' },

@@ -113,8 +113,8 @@ export async function searchMulti(query: string, page = 1) {
   return normalizeResults(data);
 }
 
-export async function getTrending(timeWindow = 'week') {
-  const data = await tmdbFetch<any>(`/trending/all/${timeWindow}`);
+export async function getTrending(timeWindow = 'week', page = 1) {
+  const data = await tmdbFetch<any>(`/trending/all/${timeWindow}`, { page });
   return normalizeResults(data);
 }
 

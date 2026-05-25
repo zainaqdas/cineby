@@ -4,7 +4,8 @@ import { getTrending } from '@/lib/tmdb';
 export async function GET(req: NextRequest) {
   try {
     const timeWindow = req.nextUrl.searchParams.get('timeWindow') || 'week';
-    const data = await getTrending(timeWindow);
+    const page = Number(req.nextUrl.searchParams.get('page')) || 1;
+    const data = await getTrending(timeWindow, page);
     return NextResponse.json(data);
   } catch (error: any) {
     return NextResponse.json(
